@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Result - Student Wellbeing Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f7fa, #e8e0ff);
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #1e1e2f;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 0;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: #40c4ff !important;
+      transition: color 0.3s ease;
+    }
+    .navbar-brand:hover {
+      color: #80deea !important;
+    }
+    .navbar-toggler {
+      border: none;
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(176, 190, 197, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Result Section */
+    .result-section {
+      padding: 120px 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+      color: #1e1e2f;
+      font-weight: 600;
+      font-size: 2.5rem;
+      position: relative;
+      margin-bottom: 30px;
+      text-align: center;
+      animation: slideIn 0.5s ease-out;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: #b388ff;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    h4 {
+      color: #1e1e2f;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
+    .table {
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table th {
+      background: #f5f7fa;
+      color: #1e1e2f;
+      font-weight: 500;
+      border: none;
+      padding: 12px;
+    }
+    .table td {
+      background: #fff;
+      color: #4a5568;
+      border: none;
+      padding: 12px;
+    }
+    .badge {
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border-radius: 20px;
+      animation: fadeIn 0.7s ease-out;
+    }
+    .bg-success {
+      background: #66bb6a !important;
+    }
+    .bg-warning {
+      background: #ffb300 !important;
+      color: #1e1e2f !important;
+    }
+    .bg-danger {
+      background: #ef5350 !important;
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(90deg, #1e1e2f, #2e2e4f);
+      color: #b0bec5;
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer a {
+      color: #b388ff;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+    .footer a:hover {
+      color: #40c4ff;
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Parallax Background */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png');
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .result-section {
+        padding: 80px 15px;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      .card {
+        padding: 25px;
+      }
+      .table th, .table td {
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+      .badge {
+        font-size: 1rem;
+        padding: 8px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax Background -->
+  <div class="parallax-bg"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Student Wellbeing</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Right-side fields removed as requested -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Result Card -->
+  <div class="container result-section">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card text-center">
+          <h2>Your Wellbeing Prediction</h2>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Perceived Stress Score (PSS)</th>
+                <td>{{ data.pss_score }}</td>
+              </tr>
+              <tr>
+                <th>Pittsburgh Sleep Quality Index (PSQI)</th>
+                <td>{{ data.psqi_score }}</td>
+              </tr>
+              <tr>
+                <th>Sleep Duration (Hours)</th>
+                <td>{{ data.sleep_hours }}</td>
+              </tr>
+              <tr>
+                <th>Daily Activities Level</th>
+                <td>
+                  {% if data.activities_hours == 1 %}
+                    Low
+                  {% elif data.activities_hours == 2 %}
+                    Moderate
+                  {% elif data.activities_hours == 3 %}
+                    High
+                  {% else %}
+                    Not specified
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Predicted Wellbeing:</h4>
+          {% if result == 'Good' %}
+            <span class="badge bg-success">Good</span>
+          {% elif result == 'Average' %}
+            <span class="badge bg-warning text-dark">Average</span>
+          {% else %}
+            <span class="badge bg-danger">Bad</span>
+          {% endif %}
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Model accuracy</th>
+                <td>{{ acc }}</td>
+              </tr>
+              <tr>
+                <th>Precision</th>
+                <td>{{ prec }}</td>
+              </tr>
+              <tr>
+                <th>Recall</th>
+                <td>{{ rec }}</td>
+              </tr>
+              <tr>
+                <th>F1 score</th>
+                <td>{{ f1 }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 Student Wellbeing Prediction. All rights reserved.</p>
+    <div>
+      <a href="/about">About</a>
+      <a href="/upload">Upload</a>
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

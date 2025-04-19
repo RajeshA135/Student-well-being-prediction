@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Wellbeing Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #e8e0ff);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #1e1e2f;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #40c4ff !important;
+            transition: color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #80deea !important;
+        }
+        .nav-link {
+            color: #b0bec5 !important;
+            font-weight: 400;
+            font-size: 1.1rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #b388ff !important;
+        }
+        .nav-link.active {
+            color: #b388ff !important;
+            font-weight: 500;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(176, 190, 197, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Banner */
+        .banner {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 50, 0.6)), url('https://images.unsplash.com/photo-1516321315098-34d5d3b51719?auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        .banner-content {
+            animation: fadeInUp 1s ease-out;
+        }
+        .banner h1 {
+            font-size: 3.8rem;
+            font-weight: 600;
+            color: #40c4ff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .banner p {
+            font-size: 1.6rem;
+            color: #eceff1;
+            margin-bottom: 30px;
+        }
+        .banner .btn-cta {
+            background: #b388ff;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .banner .btn-cta:hover {
+            background: #9575cd;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(90deg, #1e1e2f, #2e2e4f);
+            color: #b0bec5;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #b388ff;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #40c4ff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Parallax Background Overlay */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png');
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+            .banner p {
+                font-size: 1.2rem;
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            .nav-link {
+                margin: 10px 0;
+                font-size: 1rem;
+            }
+            .banner {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Student Wellbeing</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Student Wellbeing Prediction</h1>
+            <p>Empowering student health with machine learning-driven insights</p>
+            <a href="/about" class="btn-cta">Learn More</a>
+        </div>
+    </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+      <p>© 2025 Student Wellbeing Prediction. All rights reserved.</p>
+      <div>
+        <a href="/about">About</a>
+        <a href="/upload">Upload</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+      </div>
+    </div>
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

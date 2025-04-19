@@ -1,4 +1,4 @@
-# Student-well-being-prediction
+# Student-well-being-prediction using Machine Learning Algorithm
 Student_well_being_prediction/
 ├── manage.py
 ├── student_well_being_prediction/
